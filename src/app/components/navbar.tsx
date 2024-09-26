@@ -41,7 +41,6 @@ export default function Navbar() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src="/placeholder.svg?height=32&width=32" alt="" />
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -123,11 +122,6 @@ export default function Navbar() {
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto"
-                  src="/placeholder.svg?height=32&width=32"
-                  alt=""
-                />
               </Link>
               <button
                 type="button"
@@ -182,22 +176,6 @@ export default function Navbar() {
                   >
                     Log in
                   </Link>
-                  {/* <button
-                    onClick={() => setDarkMode(!darkMode)}
-                    className="mt-4 flex items-center rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
-                  >
-                    {darkMode ? (
-                      <>
-                        <Sun className="h-5 w-5 mr-2" aria-hidden="true" />
-                        Light Mode
-                      </>
-                    ) : (
-                      <>
-                        <Moon className="h-5 w-5 mr-2" aria-hidden="true" />
-                        Dark Mode
-                      </>
-                    )}
-                  </button> */}
                 </div>
               </div>
             </div>
