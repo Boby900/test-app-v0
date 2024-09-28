@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Github, Mail, Lock, Eye, EyeOff, Twitter } from 'lucide-react'
-import Image from 'next/image'
+import { useState } from "react";
+import { Github, Mail, Lock, Eye, EyeOff, Twitter } from "lucide-react";
+import Image from "next/image";
 
 export default function AuthComponent() {
-  const [isLogin, setIsLogin] = useState(true)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission (login or signup)
-    console.log(isLogin ? 'Logging in' : 'Signing up', { email, password })
-  }
+    console.log(isLogin ? "Logging in" : "Signing up", { email, password });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            {isLogin ? 'Sign in to your account' : 'Create a new account'}
+            {isLogin ? "Sign in to your account" : "Create a new account"}
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -59,7 +59,7 @@ export default function AuthComponent() {
                 <input
                   id="password"
                   name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 pl-10 border border-gray-700 placeholder-gray-500 text-white bg-gray-800 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -92,14 +92,20 @@ export default function AuthComponent() {
                 type="checkbox"
                 className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-700 rounded bg-gray-800"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-300">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-300"
+              >
                 Remember me
               </label>
             </div>
 
             {isLogin && (
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-400 hover:text-indigo-300">
+                <a
+                  href="#"
+                  className="font-medium text-indigo-400 hover:text-indigo-300"
+                >
                   Forgot your password?
                 </a>
               </div>
@@ -111,7 +117,7 @@ export default function AuthComponent() {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              {isLogin ? 'Sign in' : 'Sign up'}
+              {isLogin ? "Sign in" : "Sign up"}
             </button>
           </div>
         </form>
@@ -122,7 +128,9 @@ export default function AuthComponent() {
               <div className="w-full border-t border-gray-700" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-gray-900 text-gray-400">Or continue with</span>
+              <span className="px-2 bg-gray-900 text-gray-400">
+                Or continue with
+              </span>
             </div>
           </div>
 
@@ -154,10 +162,12 @@ export default function AuthComponent() {
             onClick={() => setIsLogin(!isLogin)}
             className="font-medium text-indigo-400 hover:text-indigo-300"
           >
-            {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+            {isLogin
+              ? "Don't have an account? Sign up"
+              : "Already have an account? Sign in"}
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }

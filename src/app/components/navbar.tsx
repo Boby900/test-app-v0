@@ -1,46 +1,49 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
+"use client";
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, ChevronDown, Moon, Sun } from "lucide-react";
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Features', href: '/features' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'About', href: '/about' },
+  { name: "Home", href: "/" },
+  { name: "Features", href: "/features" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "About", href: "/about" },
   {
-    name: 'Resources',
-    href: '#',
+    name: "Resources",
+    href: "#",
     children: [
-      { name: 'Documentation', href: '/docs' },
-      { name: 'API', href: '/api' },
-      { name: 'Support', href: '/support' },
+      { name: "Documentation", href: "/docs" },
+      { name: "API", href: "/api" },
+      { name: "Support", href: "/support" },
     ],
   },
-]
+];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [resourcesOpen, setResourcesOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
-  const pathname = usePathname()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove("dark");
     }
-  }, [darkMode])
+  }, [darkMode]);
 
   return (
     <header className="bg-white dark:bg-gray-900 transition-colors duration-300">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
+            <Image src="/logo.svg" alt="Logo" width={30} height={30} />
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -62,15 +65,18 @@ export default function Navbar() {
                   className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
                 >
                   {item.name}
-                  <ChevronDown className="h-5 w-5 flex-none text-gray-400 dark:text-gray-500" aria-hidden="true" />
+                  <ChevronDown
+                    className="h-5 w-5 flex-none text-gray-400 dark:text-gray-500"
+                    aria-hidden="true"
+                  />
                 </button>
               ) : (
                 <Link
                   href={item.href}
                   className={`text-sm font-semibold leading-6 ${
                     pathname === item.href
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-900 dark:text-gray-100'
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-900 dark:text-gray-100"
                   }`}
                 >
                   {item.name}
@@ -87,7 +93,9 @@ export default function Navbar() {
                           className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50 dark:hover:bg-gray-700"
                         >
                           <div className="ml-4">
-                            <p className="text-base font-medium text-gray-900 dark:text-gray-100">{subItem.name}</p>
+                            <p className="text-base font-medium text-gray-900 dark:text-gray-100">
+                              {subItem.name}
+                            </p>
                           </div>
                         </Link>
                       ))}
@@ -99,7 +107,10 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
-          <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
+          <Link
+            href="/login"
+            className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
+          >
             Log in <span aria-hidden="true">&rarr;</span>
           </Link>
           {/* <button
@@ -143,7 +154,10 @@ export default function Navbar() {
                           className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
                         >
                           {item.name}
-                          <ChevronDown className="h-5 w-5 flex-none" aria-hidden="true" />
+                          <ChevronDown
+                            className="h-5 w-5 flex-none"
+                            aria-hidden="true"
+                          />
                         </button>
                       ) : (
                         <Link
@@ -183,5 +197,5 @@ export default function Navbar() {
         </div>
       )}
     </header>
-  )
+  );
 }
