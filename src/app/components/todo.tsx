@@ -1,10 +1,15 @@
-//add getItem using the localstorage and then render it on screen one by one not just immediately after the form submission
+//add the authentication and it should render the data as per the logged in user's localStorage
+//for non logged in users it should not persist the data
 "use client";
+import { useSession } from "next-auth/react";
 import { Plus, Trash } from "lucide-react";
 import { useState, useEffect } from "react";
 export default function TodoApp() {
 
- const [todo, setTodo] = useState(() => {
+  const data = useSession();
+  console.log(data)
+
+  const [todo, setTodo] = useState(() => {
     const savedTodo = localStorage.getItem("todos");
     return savedTodo ? JSON.parse(savedTodo) : [];
   });
@@ -16,19 +21,18 @@ export default function TodoApp() {
     e.target.reset();
   }
 
-
   useEffect(() => {
     let data = localStorage.getItem("todos");
-    if(data){
-    setTodo(JSON.parse(data));
-    console.log(JSON.parse(data));
-    }  }, []); // Run whenever 'todo' changes
-
+    if (data) {
+      setTodo(JSON.parse(data));
+   
+    }
+  }, []); // Run whenever 'todo' changes
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todo));
   }, [todo]); // Run whenever 'todo' changes
-  
+
   function handleDelete(id) {
     setTodo((prevTodo) => prevTodo.filter((_, index) => index !== id));
     console.log("deleted");
