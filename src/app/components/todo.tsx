@@ -1,18 +1,32 @@
-//add the authentication and it should render the data as per the logged in user's localStorage
-//for non logged in users it should not persist the data
+//React DnD library
+//More TS
+//...
 "use client";
-import { useSession } from "next-auth/react";
+
 import { Plus, Trash } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react"; // Import useSession from next-auth
+
 export default function TodoApp() {
+  const { status } = useSession(); // Get session data to check if the user is logged in
+  const [todo, setTodo] = useState<string[]>([]);
 
-  const data = useSession();
-  console.log(data)
+  // Load todos from localStorage only if the user is logged in
+  useEffect(() => {
+    if (status === "authenticated" && typeof window !== "undefined") {
+      const savedTodo = localStorage.getItem("todos");
+      if (savedTodo) {
+        setTodo(JSON.parse(savedTodo));
+      }
+    }
+  }, [status]);
 
-  const [todo, setTodo] = useState(() => {
-    const savedTodo = localStorage.getItem("todos");
-    return savedTodo ? JSON.parse(savedTodo) : [];
-  });
+  // Save todos to localStorage only if the user is logged in
+  useEffect(() => {
+    if (status === "authenticated" && typeof window !== "undefined") {
+      localStorage.setItem("todos", JSON.stringify(todo));
+    }
+  }, [todo, status]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,22 +35,13 @@ export default function TodoApp() {
     e.target.reset();
   }
 
-  useEffect(() => {
-    let data = localStorage.getItem("todos");
-    if (data) {
-      setTodo(JSON.parse(data));
-   
-    }
-  }, []); // Run whenever 'todo' changes
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todo));
-  }, [todo]); // Run whenever 'todo' changes
-
   function handleDelete(id) {
     setTodo((prevTodo) => prevTodo.filter((_, index) => index !== id));
-    console.log("deleted");
   }
+
+  // if (status === "unauthenticated") {
+  //   return <p>Please log in to manage your todos.</p>; // Show a message for unauthenticated users
+  // }
 
   return (
     <div
