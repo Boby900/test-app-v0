@@ -1,10 +1,10 @@
 //React DnD library
-//More TS
-//...
+//self host it
+//edit functionality
 "use client";
 
 import { Plus, Trash } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { useSession } from "next-auth/react"; // Import useSession from next-auth
 
 export default function TodoApp() {
@@ -28,14 +28,14 @@ export default function TodoApp() {
     }
   }, [todo, status]);
 
-  function handleSubmit(e) {
+  function handleSubmit(e:any) {
     e.preventDefault();
     const value = e.target.elements.name.value;
     setTodo((prevTodo) => [...prevTodo, value]);
     e.target.reset();
   }
 
-  function handleDelete(id) {
+  function handleDelete(id:number) {
     setTodo((prevTodo) => prevTodo.filter((_, index) => index !== id));
   }
 
@@ -65,6 +65,7 @@ export default function TodoApp() {
 
       <div className="w-full mt-4">
         <ul>
+        
           {todo.map((item, index) => (
             <li key={index} className="p-2 border-b border-gray-300">
               <div className="flex justify-between p-2 m-2">
@@ -78,6 +79,7 @@ export default function TodoApp() {
               </div>
             </li>
           ))}
+         
         </ul>
       </div>
     </div>

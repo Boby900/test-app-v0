@@ -1,12 +1,11 @@
 "use client";
-//when hitting the refresh when the user is LoggedIn, first it's showing SignOut then SignIn, fix this behaviour.
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useSession } from "next-auth/react"; // Import useSession from next-auth
-import { signOut } from "next-auth/react"
+import { signOut } from "next-auth/react";
 export default function Navbar() {
   const { status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -50,9 +49,18 @@ export default function Navbar() {
             About
           </Link>
         </div>
-        {status == "authenticated" ? (
+        {status == "loading" ? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <button onClick={()=>signOut()} className="text-sm font-semibold leading-6 text-gray-100 hover:text-gray-300">
+            <span className="text-sm font-semibold leading-6 text-gray-100">
+              Loading...
+            </span>
+          </div>
+        ) : status == "authenticated" ? (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <button
+              onClick={() => signOut()}
+              className="text-sm font-semibold leading-6 text-gray-100 hover:text-gray-300"
+            >
               Sign Out <span aria-hidden="true">&rarr;</span>
             </button>
           </div>
@@ -87,7 +95,10 @@ export default function Navbar() {
             {status == "authenticated" ? (
               <button
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-100 hover:bg-gray-800"
-                onClick={() => {setMobileMenuOpen(false); signOut()}}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  signOut();
+                }}
               >
                 Sign Out
               </button>
