@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import React from 'react'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import Navbar from "./components/navbar";
 import { SessionProvider } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
@@ -20,8 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
       <SessionProvider>
         <Navbar />
-
+        {/* <DndProvider backend={HTML5Backend}> */}
         {children}
+        {/* </DndProvider> */}
         </SessionProvider>
       </body>
     </html>
