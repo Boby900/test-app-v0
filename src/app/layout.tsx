@@ -23,9 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
       <SessionProvider>
         <Navbar />
-        {/* <DndProvider backend={HTML5Backend}> */}
+        <DndProvider backend={HTML5Backend}>
         {children}
-        {/* </DndProvider> */}
+        </DndProvider>
         </SessionProvider>
       </body>
     </html>
